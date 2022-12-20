@@ -16,7 +16,6 @@ function App() {
           <Route path="/today" element={<Today />} />
         </Routes>
       </div>
-      >
     </div>
   );
 }

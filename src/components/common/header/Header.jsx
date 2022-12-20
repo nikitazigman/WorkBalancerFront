@@ -1,23 +1,28 @@
 import React from 'react';
 
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
+import logo from "../../../img/workbalancer_icon.png";
 import './Header.css';
+
 
 function Header(props) {
 
   return (
     <nav className='nav'>
-      <Link to="/" className='nav-logo'>WorkBalancer</Link>
+      <Link to="/" className='nav-logo'>
+        <div className="logo-text">WorkBalancer</div>
+        <img src={logo} alt="cat" className="logo-image" />
+      </Link>
 
       <ul className='nav-navigation'>
         <NavLink to="/today">Today</NavLink>
         <NavLink to="/backlog">Backlog</NavLink>
+        <NavLink to="/history">History</NavLink>
       </ul>
 
 
       <ul className='nav-account'>
-        <NavLink to="/user">UserName</NavLink>
-        <NavLink to="/logout">Logout</NavLink>
+        <NavLink to="/user">Nikita</NavLink>
       </ul>
 
     </nav >

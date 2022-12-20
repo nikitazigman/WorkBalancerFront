@@ -1,28 +1,27 @@
 .nav {
-  height: 76px;
-  width: auto;
+  height: 3.8vh;
+  width: 100;
+  /* background-color: aqua; */
   display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  gap: 2rem;
-  padding: 0 1rem;
-  box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 2.24vh;
+  font-weight: 400;
+  font-size: 1.7vw;
+  line-height: 3.6vh;
 }
 
 .nav ul {
-  padding: 0;
-  margin: 0;
   list-style: none;
   display: flex;
-  gap: 1rem;
 }
 
 .nav li.active {
-  text-decoration: underline;
+  text-decoration: line-through;
 }
 
 .nav a:hover {
-  text-decoration: underline;
+  cursor: pointer;
 }
 
 .nav a {
@@ -31,9 +30,23 @@
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 0.25rem;
 }
 
 .nav-logo {
-  font-size: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.6vw;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.nav-navigation {
+  display: flex;
+  width: 500px;
+  gap: 1.6vw;
+}
+
+.nav-account {
+  display: flex;
+  justify-content: space-between;
 }

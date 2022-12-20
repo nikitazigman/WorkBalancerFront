@@ -1,0 +1,45 @@
+.today-section {
+  /* background-color: aqua; */
+  font-weight: 400;
+  font-size: 1.4vw;
+  line-height: 1.9vw;
+}
+
+.input-task {
+  width: 100%;
+  padding: 1.8vh 2.3vw;
+  background-color: #00171f;
+  mix-blend-mode: normal;
+  border-radius: 0.9vw;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 1.4vw;
+  line-height: 1.9vw;
+}
+
+.ToDo-list {
+  margin-top: 6.4vw;
+  /* background-color: aquamarine; */
+}
+
+.task-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.8vh 2.3vw;
+  gap: 3vh;
+  background-color: #ffffff;
+  mix-blend-mode: normal;
+  border-radius: 0.9vw;
+  margin-top: 1.1vw;
+}
+
+.task-description:hover {
+  position: relative;
+  box-shadow: 0px 0px 5.8vw rgba(0, 23, 31, 0.3);
+  z-index: 10;
+}
+
+.task-done {
+  text-decoration: line-through;
+}

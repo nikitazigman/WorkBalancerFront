@@ -1,0 +1,35 @@
+.input-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.2vw;
+  padding: 1.8vh 2.3vw;
+  background-color: #00171f;
+  mix-blend-mode: normal;
+  border-radius: 0.9vw;
+}
+.input-props {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.2vw;
+}
+.task-input {
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 1.4vw;
+  line-height: 1.9vw;
+  background-color: #00171f;
+}
+
+.title {
+  width: 80%;
+}
+
+.difficulty {
+  width: 10%;
+}
+.deadline {
+  width: 30%;
+}

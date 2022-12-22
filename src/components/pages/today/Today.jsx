@@ -1,23 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { TaskForm, TasksList } from "../../common";
+
+import data from "../../../data";
 import './Today.css';
+
 function Today() {
+    const [day, setDay] = useState(1)
+    const [tasks, setTask] = useState(data)
+
+    const completeTask = ({ id }) => {
+        const new_tasks = tasks.map(
+            (item) => {
+                if (item.id === id) {
+                    return { ...item, completed: !item.completed };
+                }
+                return item;
+            }
+        )
+        console.log(new_tasks)
+        setTask(new_tasks)
+    }
+
     return (
         <section className='today-section'>
-            <input className="input-task" type="text" placeholder='Start typing a new task here' />
-            <div className='ToDo-list'>
-                <div className="task-description">
-                    <div className="task-title">1. task one</div>
-                    <div className="task-deadline">01.01.2022</div>
-                </div>
-                <div className="task-description">
-                    <div className="task-title">2. task two</div>
-                    <div className="task-deadline">01.01.2022</div>
-                </div>
-                <div className="task-description">
-                    <div className="task-title">3. task three</div>
-                    <div className="task-deadline">01.01.2022</div>
-                </div>
-            </div>
+            <TaskForm tasks={tasks} setTask={setTask} day_id={day} />
+            <TasksList show_level={false} tasks={tasks} completeTask={completeTask} />
         </section>
     )
 }

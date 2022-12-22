@@ -1,0 +1,100 @@
+.sign-up {
+    margin: 0 auto;
+    width: 50.3vh;
+    height: 60.8vh;
+    filter: drop-shadow(0px 4px 100px rgba(0, 23, 31, 0.3));
+    border-radius: 20px;
+    /* background-color: aqua; */
+    padding: 7.1vh 4.8vw;
+}
+
+.sign-up-header {
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 3.8vh;
+    line-height: 5.1vh;
+    text-align: center;
+    text-transform: capitalize;
+    color: #00171F;
+}
+
+.sign-up-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.8vh;
+    margin-top: 8.7vh;
+}
+
+.sign-up-form .input {
+    display: block;
+    width: 100%;
+    padding: 1.6vh 3.1vh;
+    background: #FFFFFF;
+    border-radius: 1.8vh;
+    border: 0;
+
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2.1vh;
+    line-height: 2.8vh;
+
+    text-align: center;
+
+    color: #00171F;
+}
+
+.sign-up-form .input::placeholder {
+    color: #00171F;
+}
+
+.sign-up-form .sing-up-btn {
+    display: block;
+    width: 100%;
+    padding: 1.6vh 3.1vh;
+    background: #00171F;
+    border-radius: 1.8vh;
+    border: 0;
+
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2.1vh;
+    line-height: 2.8vh;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.sign-up-form .sing-up-btn:disabled {
+    color: gray;
+}
+
+.link-to-sing-in {
+    margin-top: 8.7vh;
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1.6vh;
+    line-height: 24px;
+    align-items: center;
+    text-align: center;
+    color: #00171F;
+}
+
+.instructions {
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1vh;
+    line-height: 1vh;
+    align-items: center;
+    text-align: center;
+    color: #00171F;
+}
+
+.sign-up-form .invalid {
+    color: gray;
+}

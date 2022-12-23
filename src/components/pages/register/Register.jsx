@@ -32,7 +32,6 @@ const Register = () => {
     const [pwdMatchPwdFocus, setMatchPwdFocus] = useState(false)
 
     const [errMsg, setErrMsg] = useState("")
-    const [success, setSuccess] = useState(false)
 
     useEffect(() => {
         userRef.current.focus()
@@ -40,15 +39,11 @@ const Register = () => {
 
     useEffect(() => {
         const result = USER_REGEX.test(user)
-        console.log(result)
-        console.log(user)
         setValidName(result)
     }, [user])
 
     useEffect(() => {
         const result = PWD_REGEX.test(pwd)
-        console.log(result)
-        console.log(pwd)
         setValidPwd(result)
         const match = pwd === matchPwd
         setMatchValidPwd(match)
@@ -70,7 +65,6 @@ const Register = () => {
                 username: user,
                 password: pwd
             })
-            console.log(credentials)
             const response = await axios.post(
                 REGISTER_URL,
                 credentials,
@@ -79,16 +73,18 @@ const Register = () => {
                     withCredentials: true
                 },
             )
-            console.log(response.data);
-            setSuccess(true);
-            setUser("");
-            setPwd("");
-            setMatchPwd("");
+            if (response.status === 201) {
+                setUser("");
+                setPwd("");
+                setMatchPwd("");
+                navigate("/login", { replace: true })
+            }
         } catch (error) {
-            if (error?.response) {
+            // console.log(error)
+            if (!error?.response) {
                 setErrMsg("No Server Response");
-            } else if (error.response?.status === 400) {
-                setErrMsg(error.data);
+            } else if (error.response.status === 400) {
+                setErrMsg(error.response.data.username);
             } else {
                 setErrMsg("Registration failed");
             }
@@ -96,15 +92,11 @@ const Register = () => {
         }
     }
 
-    useEffect(() => {
-        success && navigate("/login")
-    }, [success])
-
-
     return (
         <section className="sign-up">
             <div className="sign-up-header">Register</div>
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+
+            <p ref={errRef} className="instructions" aria-live="assertive">{errMsg}</p>
 
             <form className="sign-up-form" onSubmit={handleSubmit}>
                 <input
@@ -186,6 +178,7 @@ const Register = () => {
                     <span aria-label="percent">%</span>
                 </p>
             }
+
             <div className="link-to-sing-in">
                 Already registred? <Link to="/login">Sign In</Link>
             </div>

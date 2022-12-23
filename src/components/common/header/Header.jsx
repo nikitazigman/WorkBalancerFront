@@ -3,10 +3,10 @@ import React from 'react';
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import logo from "../../../img/workbalancer_icon.png";
 import './Header.css';
-
+import useAuth from '../../../hooks/useAuth';
 
 function Header(props) {
-
+  const { auth } = useAuth()
   return (
     <nav className='nav'>
       <Link to="/" className='nav-logo'>
@@ -14,15 +14,24 @@ function Header(props) {
         <img src={logo} alt="cat" className="logo-image" />
       </Link>
 
-      <ul className='nav-navigation'>
-        <NavLink to="/today">Today</NavLink>
-        <NavLink to="/backlog">Backlog</NavLink>
-        <NavLink to="/history">History</NavLink>
-      </ul>
+      {
+        auth?.user &&
+        <ul className='nav-navigation'>
+          <NavLink to="/today">Today</NavLink>
+          <NavLink to="/backlog">Backlog</NavLink>
+          <NavLink to="/history">History</NavLink>
+        </ul>
+      }
+
 
 
       <ul className='nav-account'>
-        <NavLink to="/user">Nikita</NavLink>
+        {
+          auth?.user ?
+            <NavLink to="/user">{auth.user}</NavLink>
+            : <NavLink to="/login">Login</NavLink>
+        }
+
       </ul>
 
     </nav >

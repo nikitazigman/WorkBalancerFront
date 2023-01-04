@@ -1,3 +1,9 @@
+# ToDo: 
+today component: live editing property of the component 
+auth parts: store the refresh token to the cache or somewhere
+header: change png to svg image
+header: add logout 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

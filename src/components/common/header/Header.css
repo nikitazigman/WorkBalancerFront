@@ -50,3 +50,8 @@
   display: flex;
   justify-content: space-between;
 }
+
+.logo-image {
+  width: 7.0vh;
+  height: 4.8vh;
+}

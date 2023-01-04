@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
-import logo from "../../../img/workbalancer_icon.png";
+import logo from "../../../img/workbalancer_icon.svg";
 import './Header.css';
 import useAuth from '../../../hooks/useAuth';
 
@@ -17,7 +17,7 @@ function Header(props) {
       {
         auth?.user &&
         <ul className='nav-navigation'>
-          <NavLink to="/today">Today</NavLink>
+          <NavLink to="/">Today</NavLink>
           <NavLink to="/backlog">Backlog</NavLink>
           <NavLink to="/history">History</NavLink>
         </ul>

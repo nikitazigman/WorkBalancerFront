@@ -4,7 +4,6 @@
   align-items: center;
   padding: 1.8vh 2.3vw;
   gap: 3vh;
-  background-color: #ffffff;
   mix-blend-mode: normal;
   border-radius: 0.9vw;
   margin-top: 1.1vw;
@@ -24,4 +23,36 @@
   display: flex;
   justify-content: space-between;
   gap: 1.2vw;
+}
+
+.task-title {
+  width: 70%;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+.task-props-input {
+  /* border: 0px; */
+  margin: 0px;
+  padding: 0px;
+  color: #00171f;
+  font-weight: 400;
+  font-size: 1.4vw;
+  line-height: 1.9vw;
+  width: min-content;
+}
+
+
+input[type="text"] {
+  background: transparent;
+  width: min-content;
+  border: none;
+}
+
+input[type="text"]:focus {
+  background: transparent;
+  width: min-content;
+  border: none;
+  outline-width: 0;
 }

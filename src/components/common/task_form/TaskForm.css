@@ -7,11 +7,13 @@
   mix-blend-mode: normal;
   border-radius: 0.9vw;
 }
+
 .input-props {
   display: flex;
   justify-content: flex-start;
   gap: 1.2vw;
 }
+
 .task-input {
   border: 0px;
   margin: 0px;
@@ -23,6 +25,7 @@
   background-color: #00171f;
 }
 
+
 .title {
   width: 80%;
 }
@@ -30,6 +33,40 @@
 .difficulty {
   width: 10%;
 }
+
 .deadline {
   width: 30%;
+}
+
+.select-container {
+  margin-top: 1vw;
+  display: flex;
+  justify-content: space-around;
+  gap: 1vw;
+  color: #00171f;
+  font-weight: 400;
+  font-size: 1.4vw;
+  line-height: 1.9vw;
+}
+
+.select-backlog {
+  width: 70%;
+  border: 0px;
+  color: #00171f;
+  font-weight: 400;
+  font-size: 1.4vw;
+  line-height: 1.9vw;
+}
+
+.options-container {
+  border-radius: 0.9vw;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #00171f;
+}
+
+.wrong-fromat-notification {
+  height: 3vh;
+  padding: 1vh 1vw;
+  margin-top: 0.2vh;
 }

@@ -98,7 +98,7 @@ const Login = () => {
                     placeholder="password"
                     className="input"
                 />
-                <button disabled={!(user && pwd)} className="sing-up-btn">Sign up</button>
+                <button disabled={!(user && pwd)} className="sing-up-btn">Sign in</button>
             </form>
 
             <div className="link-to-sing-in">

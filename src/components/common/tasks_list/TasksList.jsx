@@ -4,12 +4,15 @@ import { Task } from "../../common";
 import './TasksList.css';
 
 
-function TasksList({ show_level, tasks, completeTask, ...props }) {
+function TasksList({ showLevel, tasks, onChange, onClick, onSubmit, ...props }) {
     const items = tasks.map(item => {
         return <Task
             key={item.id}
-            task={{ ...item, difficulty: show_level && item.difficulty }}
-            completeTask={completeTask}
+            task={item}
+            showLevel={showLevel}
+            onClick={onClick}
+            onChange={onChange}
+            onSubmit={onSubmit}
         />
     })
     return (

@@ -18,7 +18,6 @@ function Today() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    console.log("render today page")
     const completeTask = ({ id }) => {
         let changed_task = tasks.find(task => task.id === id);
 

@@ -4,5 +4,7 @@ import TasksList from "./tasks_list";
 import TaskForm from "./task_form";
 import RequireAuth from "./requireAuth";
 import Layout from "./layout";
+import PersistLogin from "./persistLogin";
 
-export { Header, Task, TasksList, TaskForm, RequireAuth, Layout };
+
+export { Header, Task, TasksList, TaskForm, RequireAuth, Layout, PersistLogin };

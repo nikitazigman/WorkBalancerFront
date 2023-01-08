@@ -1,10 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import './Task.css';
 import moment from "moment/moment";
-
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import './Task.css';
 
 const TITLE_REGEX = /^[a-zA-Z0-9 ]{0,40}$/
 const LEVEL_REGEX = /^[1-9]{1}$/

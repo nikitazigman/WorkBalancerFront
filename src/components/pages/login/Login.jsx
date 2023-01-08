@@ -1,12 +1,11 @@
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-
 import useAuth from "../../../hooks/useAuth";
 import axios from "../../../api/axios";
 import "./Login.css";
+import useInput from "../../../hooks/useInput";
 
-
-const LOGIN_URL = "api/token/"
+const LOGIN_URL = "api/auth/login/"
 
 const Login = () => {
     const navigate = useNavigate();
@@ -18,7 +17,7 @@ const Login = () => {
     const userRef = useRef();
     const errRef = useRef();
 
-    const [user, setUser] = useState("");
+    const [user, userReset, userAttributes] = useInput("username", "");
     const [pwd, setPwd] = useState("");
     const [errMsg, setErrMsg] = useState("");
 
@@ -50,12 +49,11 @@ const Login = () => {
             );
             console.log(response.data);
 
-            const accessToken = response?.data?.access;
-            const refreshToken = response?.data?.refresh;
+            const accessToken = response?.data?.access_token;
 
-            setAuth({ user, pwd, accessToken, refreshToken })
+            setAuth({ user, accessToken })
 
-            setUser("");
+            userReset();
             setPwd("");
             navigate(from, { replace: true });
         } catch (error) {
@@ -83,8 +81,7 @@ const Login = () => {
                     id="username"
                     ref={userRef}
                     autoComplete="off"
-                    onChange={(e) => setUser(e.target.value)}
-                    value={user}
+                    {...userAttributes}
                     required
                     placeholder="username"
                     className="input"

@@ -55,3 +55,20 @@
   width: 7.0vh;
   height: 4.8vh;
 }
+
+.user-container {}
+
+.logout-btn:hover {
+  cursor: pointer;
+}
+
+.dropdown-user-menu {
+  display: none;
+  position: absolute;
+  background-color: transparent;
+  z-index: 1;
+}
+
+.user-container:hover .dropdown-user-menu {
+  display: block;
+}

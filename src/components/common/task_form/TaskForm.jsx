@@ -24,19 +24,17 @@ function TaskForm({ date, tasks, setTasks, options, setOptions, ...props }) {
     const [validTitle, setValidTitle] = useState(false);
     const [titleFocus, setTitleFocus] = useState(false);
 
-    const [level, setLevel] = useState();
+    const [level, setLevel] = useState("");
     const [validLevel, setValidLevel] = useState(false);
     const [levelFocus, setLevelFocus] = useState(false);
 
-    const [deadline, setDeadline] = useState();
+    const [deadline, setDeadline] = useState("");
     const [validDeadline, setValidDeadline] = useState(false);
     const [deadlineFocus, setDeadlineFocus] = useState(false);
 
-    const [id, setID] = useState();
     const [suitableOptions, setSuitableOptions] = useState([])
 
     const axiosPrivate = useAxiosPrivate();
-    console.log(id)
 
     const addTask = (event) => {
         event.preventDefault();
@@ -63,9 +61,9 @@ function TaskForm({ date, tasks, setTasks, options, setOptions, ...props }) {
             console.log(result)
             if (result) {
                 setTasks([...tasks, createdTask]);
-                setTitle();
-                setLevel();
-                setDeadline();
+                setTitle("");
+                setLevel("");
+                setDeadline("");
             }
         })
     }

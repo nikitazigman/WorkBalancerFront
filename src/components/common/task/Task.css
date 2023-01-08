@@ -7,11 +7,12 @@
   mix-blend-mode: normal;
   border-radius: 0.9vw;
   margin-top: 1.1vw;
+  background-color: #ffffff;
 }
 
 .task-description:hover {
   position: relative;
-  box-shadow: 0px 0px 5.8vw rgba(0, 23, 31, 0.3);
+  box-shadow: 0px 0px 100px rgba(0, 23, 31, 0.3);
   z-index: 10;
 }
 
@@ -44,13 +45,13 @@
 }
 
 
-input[type="text"] {
+.task-props-input[type="text"] {
   background: transparent;
   width: min-content;
   border: none;
 }
 
-input[type="text"]:focus {
+.task-props-input[type="text"]:focus {
   background: transparent;
   width: min-content;
   border: none;

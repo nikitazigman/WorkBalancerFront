@@ -4,9 +4,40 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import logo from "../../../img/workbalancer_icon.svg";
 import './Header.css';
 import useAuth from '../../../hooks/useAuth';
+import { axiosPrivate } from '../../../api/axios';
+import useInput from '../../../hooks/useInput';
+import { useNavigate } from "react-router-dom";
+
+const LOGOUT_URL = "api/auth/logout/"
 
 function Header(props) {
-  const { auth } = useAuth()
+  const { auth, setAuth } = useAuth();
+  const [user, resetUser, useAttr] = useInput("username", "")
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    const logoutRequest = async () => {
+      try {
+        const response = await axiosPrivate.post(
+          LOGOUT_URL,
+          {},
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+        console.log(response?.data);
+        setAuth({});
+        resetUser();
+        navigate("/login", { replace: true });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    console.log("logout")
+    logoutRequest();
+  }
+
+
   return (
     <nav className='nav'>
       <Link to="/" className='nav-logo'>
@@ -28,7 +59,12 @@ function Header(props) {
       <ul className='nav-account'>
         {
           auth?.user ?
-            <NavLink to="/user">{auth.user}</NavLink>
+            <div className="user-container">
+              <div className="username">{auth.user}</div>
+              <div className="dropdown-user-menu">
+                <div className="logout-btn" onClick={logoutHandler}>logout</div>
+              </div>
+            </div>
             : <NavLink to="/login">Login</NavLink>
         }
 

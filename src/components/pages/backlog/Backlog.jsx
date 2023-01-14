@@ -17,7 +17,7 @@ function Backlog() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    console.log("render backlog page")
+    // console.log("render backlog page")
 
     useEffect(() => {
         let isMounted = true;
@@ -74,12 +74,12 @@ function Backlog() {
         }
 
         updateTask();
-        console.log("task is submitted")
+        // console.log("task is submitted")
     }
 
     return (
         <section className='today-section'>
-            <TaskForm tasks={tasks} setTask={setTasks} />
+            <TaskForm tasks={tasks} setTasks={setTasks} />
             <TasksList
                 showLevel={true}
                 tasks={tasks}

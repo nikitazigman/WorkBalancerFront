@@ -19,6 +19,12 @@ const default_input = {
 const TITLE_REGEX = /^[a-zA-Z0-9 ]{0,40}$/
 const LEVEL_REGEX = /^[1-9]{1}$/
 
+const optionStyle = {
+    "padding": "1vh 2.3vw",
+    "gap": "1vh",
+    "margin-top": "0"
+}
+
 function TaskForm({ date, tasks, setTasks, options, setOptions, ...props }) {
     const [title, setTitle] = useState("");
     const [validTitle, setValidTitle] = useState(false);
@@ -48,7 +54,7 @@ function TaskForm({ date, tasks, setTasks, options, setOptions, ...props }) {
                         headers: { "Content-Type": "application/json" }
                     }
                 )
-                return response?.status === 201;
+                return response;
             } catch (error) {
                 console.log("got error during task creation");
                 console.log(error);
@@ -56,11 +62,12 @@ function TaskForm({ date, tasks, setTasks, options, setOptions, ...props }) {
             }
         }
 
-        createTask().then((result) => {
-            console.log("task is created. Updating tasksState")
-            console.log(result)
-            if (result) {
-                setTasks([...tasks, createdTask]);
+        createTask().then((response) => {
+            // console.log("task is created. Updating tasksState")
+            // console.log(response?.data)
+            if (response?.status === 201) {
+                const savedTask = response?.data;
+                setTasks([...tasks, savedTask]);
                 setTitle("");
                 setLevel("");
                 setDeadline("");
@@ -77,6 +84,7 @@ function TaskForm({ date, tasks, setTasks, options, setOptions, ...props }) {
         const result = LEVEL_REGEX.test(level)
         setValidLevel(result);
     }, [level])
+
     useEffect(() => {
         const date = moment(deadline, "YYYY-MM-DD", true)
         setValidDeadline(date.isValid())
@@ -194,16 +202,13 @@ function TaskForm({ date, tasks, setTasks, options, setOptions, ...props }) {
                     {
                         suitableOptions.map((option) => {
                             return (
-                                <Task
-                                    key={option.id}
-                                    task={option}
-                                    onClick={handleSelectOption}
-                                    style={{
-                                        padding: "0.5vh 1.5vw",
-                                        gap: "0.1vh",
-                                        marginTop: "0.1vw",
-                                    }}
-                                />
+                                <div key={option.id} style={optionStyle} className="task-description" onClick={() => handleSelectOption(option)}>
+                                    <div className="task-title">{option.title}</div>
+                                    <div className="task-props">
+                                        <div className="task-level">{option.level}</div>
+                                        <div className="task-deadline">{option.deadline}</div>
+                                    </div>
+                                </div>
                             )
                         })
                     }

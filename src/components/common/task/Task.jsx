@@ -45,7 +45,7 @@ function Task({ task, setTasks, onClick, onChange, onSubmit, style, showLevel, .
         <form onSubmit={handleSubit}>
             <input disabled={!(validLevel && validTitle && validDeadline)} type="submit" hidden />
 
-            <div className={"task-description"} onDoubleClick={onClick ? () => onClick(task) : null} style={style}>
+            <div className="task-description" onDoubleClick={onClick ? () => onClick(task) : null} style={style}>
                 <div className="task-title">
                     <input
                         name="title"

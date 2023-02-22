@@ -1,3 +1,51 @@
+.task-section {
+  width: 100%;
+  height: fit-content;
+}
+
+.task-section .tips-container {
+  width: 100%;
+  font-size: 18px;
+  text-align: center;
+}
+
+.task-section .form-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 5px;
+}
+
+.task-section .task-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px;
+  gap: 20px;
+
+  background: #FFFFFF;
+  border: 3px solid #0B0A07;
+  border-radius: 17px;
+}
+
+.task-section .task-props {
+  padding: 0px;
+  gap: 30px;
+}
+
+.task-section .task-input {
+  margin: 0px;
+  padding: 0px;
+  color: #0B0A07;
+  width: max-content;
+  background: transparent;
+  width: min-content;
+  border: none;
+}
+
 .task-description {
   display: flex;
   justify-content: space-between;
@@ -37,11 +85,14 @@
   /* border: 0px; */
   margin: 0px;
   padding: 0px;
-  color: #00171f;
-  font-weight: 400;
-  font-size: 1.4vw;
-  line-height: 1.9vw;
-  width: min-content;
+  width: 100%;
+
+  background: transparent;
+  border-radius: 17px;
+
+  font-size: 24px;
+  text-align: center;
+  color: #0B0A07;
 }
 
 

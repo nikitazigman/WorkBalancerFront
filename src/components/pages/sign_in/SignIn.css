@@ -1,0 +1,93 @@
+.sign-in-section {
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    padding: 121px 447px;
+}
+
+.sign-in-container {
+    width: 548px;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+
+    padding: 41px 0px;
+
+    background: #F6AE2D;
+    border: 3px solid #0B0A07;
+    border-radius: 17px;
+
+}
+
+.sign-in-header {
+    font-size: 40px;
+    text-align: center;
+}
+
+.sign-in-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 50px;
+    gap: 12px;
+
+    border-radius: 17px;
+}
+
+.sign-in-form .input {
+    padding: 17px 35px;
+    width: 100%;
+
+    background: #FFFFFF;
+    border: 1px solid #0B0A07;
+    border-radius: 17px;
+
+    font-size: 24px;
+    text-align: center;
+    color: #0B0A07;
+}
+
+.sign-in-form .input::placeholder {
+    color: #0B0A07;
+}
+
+.sign-in-form .sing-in-btn {
+    width: 100%;
+    padding: 17px 35px;
+    background: #0B0A07;
+    border-radius: 17px;
+    border: 0;
+
+    font-size: 24px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.sign-in-form .sing-in-btn:disabled {
+    text-decoration: line-through;
+}
+
+.sign-in-form .link-to-sing-up {
+    height: fit-content;
+    font-size: 18px;
+    align-items: center;
+    text-align: center;
+}
+
+
+.sign-in-section .tips-container {
+    width: 548px;
+    font-size: 18px;
+    text-align: center;
+}

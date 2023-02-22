@@ -8,8 +8,26 @@ import './Task.css';
 const TITLE_REGEX = /^[a-zA-Z0-9 ]{0,40}$/
 const LEVEL_REGEX = /^[1-9]{1}$/
 
-function Task({ task, setTasks, onClick, onChange, onSubmit, style, showLevel, ...props }) {
-    const className = task.completed ? "task-props-input task-done" : "task-props-input"
+// function Task({ task, setTasks, onClick, onChange, onSubmit, style, showLevel, ...props }) {
+function Task() {
+    const task = {
+        archived: false,
+        completed: true,
+        days: [422, 431, 429, 427, 430, 423, 428, 424, 425],
+        deadline: "1972-12-16",
+        id: 762,
+        level: 1,
+        title: "test_new_title"
+    }
+
+    const onChange = (name, id) => { console.log(`changing ${name} ${id}`) }
+    const onComplete = (name, id) => { console.log(`completing ${name} ${id}`) }
+    const onArchived = (id) => { console.log(`archiving ${id}`) }
+    const onUpdate = (id) => { console.log(`updating ${id}`) }
+
+
+
+    const [disabled, setDisabled] = useState(true)
 
     const [validTitle, setValidTitle] = useState(true);
     const [titleFocus, setTitleFocus] = useState(false);
@@ -20,11 +38,11 @@ function Task({ task, setTasks, onClick, onChange, onSubmit, style, showLevel, .
     const [validDeadline, setValidDeadline] = useState(true);
     const [deadlineFocus, setDeadlineFocus] = useState(false);
 
+
     useEffect(() => {
         const result = TITLE_REGEX.test(task.title)
         setValidTitle(result);
     }, [task.title])
-
 
     useEffect(() => {
         const result = LEVEL_REGEX.test(String(task.level))
@@ -36,62 +54,14 @@ function Task({ task, setTasks, onClick, onChange, onSubmit, style, showLevel, .
         setValidDeadline(date.isValid())
     }, [task.deadline])
 
-    const handleSubit = (event) => {
-        event.preventDefault();
-        onSubmit && onSubmit(task);
+    const handleEdit = () => {
+        !disabled && onUpdate(task)
+        setDisabled((status) => !status)
     }
 
     return (
-        <form onSubmit={handleSubit}>
-            <input disabled={!(validLevel && validTitle && validDeadline)} type="submit" hidden />
-
-            <div className="task-description" onDoubleClick={onClick ? () => onClick(task) : null} style={style}>
-                <div className="task-title">
-                    <input
-                        name="title"
-                        type="text"
-                        className={className}
-                        value={task.title}
-                        onChange={onChange ? (event) => onChange(event, task) : () => { }}
-                        size={task.title.length}
-                        required
-                        onFocus={() => setTitleFocus(true)}
-                        onBlur={() => setTitleFocus(false)}
-                    />
-                </div>
-                <div className="task-props">
-                    {
-                        showLevel &&
-                        <div className="task-level">
-                            <input
-                                type="text"
-                                name="level"
-                                className={className}
-                                value={task.level}
-                                onChange={onChange ? (event) => onChange(event, task) : () => { }}
-                                size="1"
-                                required
-                                onFocus={() => setLevelFocus(true)}
-                                onBlur={() => setLevelFocus(false)}
-                            />
-                        </div>
-                    }
-                    <div className="task-deadline">
-                        <input
-                            type="text"
-                            name="deadline"
-                            className={className}
-                            value={task.deadline}
-                            onChange={onChange ? (event) => onChange(event, task) : () => { }}
-                            size={task.deadline.length}
-                            required
-                            onFocus={() => setDeadlineFocus(true)}
-                            onBlur={() => setDeadlineFocus(false)}
-                        />
-                    </div>
-                </div>
-            </div >
-            <div className="task-wrong-fromat-notification">
+        <section className="task-section">
+            <div className="tips-container">
                 {
                     task.title && titleFocus && !validTitle &&
                     <p id="title-note" className="instructions">
@@ -114,7 +84,59 @@ function Task({ task, setTasks, onClick, onChange, onSubmit, style, showLevel, .
                     </p>
                 }
             </div>
-        </form>
+            <div className="form-container">
+                <div className="task-container">
+                    <TaskInput
+                        name="title"
+                        completed={task.completed}
+                        value={task.title}
+                        onFocus={setTitleFocus}
+                        onChange={(event) => onChange(task.id)}
+                        disabled={disabled}
+                    />
+                    <div className="task-props">
+                        <TaskInput
+                            name="level"
+                            completed={task.completed}
+                            value={task.level}
+                            onFocus={setLevelFocus}
+                            onChange={(event) => onChange(task.id)}
+                            disabled={disabled}
+                        />
+                        <TaskInput
+                            name="deadline"
+                            completed={task.completed}
+                            value={task.deadline}
+                            onFocus={setDeadlineFocus}
+                            onChange={(event) => onChange(task.id)}
+                            disabled={disabled}
+                        />
+                    </div>
+                </div>
+                <div className="buttons-container">
+                    <button className="btn-complete">complete</button>
+                    <button className="btn-edit" onClick={handleEdit}>edit</button>
+                    <button className="btn-archived">edit</button>
+                </div>
+            </div>
+        </section>
+    )
+}
+
+const TaskInput = ({ name, completed, value, onFocus, onChange, disabled, ...props }) => {
+    const className = completed ? "task-input task-done" : "task-input"
+
+    return (
+        <input
+            type="text"
+            name={name}
+            className={className}
+            value={value}
+            onChange={!disabled ? onChange : () => { }}
+            required
+            onFocus={() => onFocus(true)}
+            onBlur={() => onFocus(false)}
+        />
     )
 }
 

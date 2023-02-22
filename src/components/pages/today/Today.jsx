@@ -11,71 +11,79 @@ import config from '../../../configs/config';
 
 import './Today.css';
 
+const test_tasks = [
+    {
+        archived: false,
+        completed: true,
+        days: [422, 431, 429, 427, 430, 423, 428, 424, 425],
+        deadline: "1972-12-16",
+        id: 762,
+        level: 1,
+        title: "test_new_title"
+    },
+    {
+        archived: false,
+        completed: false,
+        days: [422, 431, 429, 427, 430, 423, 428, 424, 425],
+        deadline: "1972-12-11",
+        id: 763,
+        level: 3,
+        title: "test1_new_title"
+    },
+    {
+        archived: false,
+        completed: true,
+        days: [422, 431, 429, 427, 430, 423, 428, 424, 425],
+        deadline: "1972-12-14",
+        id: 764,
+        level: 5,
+        title: "test2_new_title asdasdlkajsdkljahsd a asjdha"
+    },
+    {
+        archived: false,
+        completed: true,
+        days: [422, 431, 429, 427, 430, 423, 428, 424, 425],
+        deadline: "1972-12-19",
+        id: 765,
+        level: 4,
+        title: "test3_new_title"
+    }
+]
+
 function Today() {
     const [getToday,] = useDays();
     const [getTasks,] = useTasks();
 
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState(test_tasks);
     // const [options, setOptions] = useState([]);
 
     console.log(tasks)
 
-    // const completeTask = ({ id }) => {
-    //     let changed_task = tasks.find(task => task.id === id);
+    const onChange = (prop_obj, id) => {
+        console.log("on change")
+        console.log(prop_obj)
+        console.log(id)
 
-    //     const updateTask = async () => {
-    //         changed_task.completed = !changed_task.completed;
-    //         try {
-    //             const response = await axiosPrivate.put(`api/task/${id}/`,
-    //                 JSON.stringify(changed_task),
-    //                 {
-    //                     headers: { "Content-Type": "application/json" }
-    //                 });
-    //             return response?.status === 200;
-    //         }
-    //         catch (error) {
-    //             console.log("update task got error");
-    //             console.log(error);
-    //             return error;
-    //         }
-    //     }
-
-    //     updateTask().then((result) => {
-    //         console.log("task is completed")
-    //         result && setTasks(prev => tasks.map(x => x));
-    //     });
-    // }
-
-    // const updateTaskProps = (event, updatedTask) => {
-    //     const updatedTasks = tasks.map((task) => {
-    //         if (task.id === updatedTask.id) {
-    //             return { ...task, [event.target.name]: event.target.value };
-    //         }
-    //         return task;
-    //     })
-    //     setTasks(updatedTasks)
-    // }
-
-    // const SubmitUpdatedTask = (task) => {
-    //     const updateTask = async () => {
-    //         try {
-    //             const response = await axiosPrivate.put(`/api/task/${task.id}/`,
-    //                 JSON.stringify(task),
-    //                 {
-    //                     headers: { "Content-Type": "application/json" }
-    //                 }
-    //             )
-    //             return response?.status === 200;
-    //         } catch (error) {
-    //             console.log("got error during task updating");
-    //             console.log(error);
-    //             return false;
-    //         }
-    //     }
-
-    //     updateTask();
-    //     console.log("task is submitted")
-    // }
+        setTasks(
+            (tasks) => {
+                return tasks.map((task) => {
+                    return task.id == id ? { ...task, ...prop_obj } : task;
+                })
+            }
+        )
+    }
+    const onComplete = (id) => {
+        console.log(`completing ${id}`)
+        setTasks(
+            (tasks) => {
+                return tasks.map((task) => {
+                    return task.id == id ? { ...task, completed: !task.completed } : task;
+                })
+            }
+        )
+    }
+    const onArchived = (id) => { console.log(`archiving ${id}`) }
+    const onUpdate = (id) => { console.log(`updating ${id}`) }
 
     useEffect(() => {
         const requestTasks = async () => {
@@ -104,9 +112,18 @@ function Today() {
                 })
             } */}
             <div className="tasks-container">
-                <Task />
-                <Task />
-                <Task />
+                {tasks.map((task) => {
+                    return (
+                        <Task
+                            key={task.id}
+                            task={task}
+                            onArchived={onArchived}
+                            onChange={onChange}
+                            onUpdate={onUpdate}
+                            onComplete={onComplete}
+                        />
+                    )
+                })}
             </div>
         </section>
     )

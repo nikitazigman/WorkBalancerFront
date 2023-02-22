@@ -15,3 +15,15 @@ body {
 .AppContainer {
   margin: 0px auto;
 }
+
+input {
+  font-size: 24px;
+  text-align: center;
+  color: #0B0A07;
+}
+
+input:focus {
+  outline: 1px solid #0B0A07;
+  /* border: 3px solid #0B0A07; */
+  box-shadow: 0px 4px 0px #0B0A07;
+}

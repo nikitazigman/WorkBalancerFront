@@ -1,0 +1,17 @@
+.info-container {
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 18px;
+    text-align: left;
+}
+
+.info-icon {
+    width: 24px;
+    height: 24px;
+}

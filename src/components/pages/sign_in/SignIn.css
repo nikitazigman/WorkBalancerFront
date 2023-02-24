@@ -1,18 +1,20 @@
 .sign-in-section {
+    width: 548px;
     height: fit-content;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 10px;
 
-    padding: 121px 447px;
+    margin: 0px auto;
+    margin-top: 95px;
 }
 
 .sign-in-container {
-    width: 548px;
-    height: fit-content;
+    width: 100%;
+    height: 531px;
 
     display: flex;
     flex-direction: column;
@@ -25,7 +27,6 @@
     background: #F6AE2D;
     border: 3px solid #0B0A07;
     border-radius: 17px;
-
 }
 
 .sign-in-header {
@@ -45,49 +46,9 @@
     border-radius: 17px;
 }
 
-.sign-in-form .input {
-    padding: 17px 35px;
-    width: 100%;
-
-    background: #FFFFFF;
-    border: 1px solid #0B0A07;
-    border-radius: 17px;
-
-    font-size: 24px;
-    text-align: center;
-    color: #0B0A07;
-}
-
-.sign-in-form .input::placeholder {
-    color: #0B0A07;
-}
-
-.sign-in-form .sing-in-btn {
-    width: 100%;
-    padding: 17px 35px;
-    background: #0B0A07;
-    border-radius: 17px;
-    border: 0;
-
-    font-size: 24px;
-    text-align: center;
-    color: #FFFFFF;
-}
-
-.sign-in-form .sing-in-btn:disabled {
-    text-decoration: line-through;
-}
-
 .sign-in-form .link-to-sing-up {
     height: fit-content;
     font-size: 18px;
     align-items: center;
-    text-align: center;
-}
-
-
-.sign-in-section .tips-container {
-    width: 548px;
-    font-size: 18px;
     text-align: center;
 }

@@ -5,6 +5,10 @@ import axios from "../../../api/axios";
 import useInput from "../../../hooks/useInput";
 import useAuth from "../../../hooks/useAuth";
 
+import AuthInput from "../../common/auth_input/AuthInput";
+import AuthButton from "../../common/auth_btn/AuthButton";
+import Info from "../../common/info/Info";
+
 import config from "../../../configs/config"
 
 import "./SignIn.css";
@@ -17,8 +21,6 @@ const Login = () => {
 
     const { setAuth } = useAuth();
 
-    const userRef = useRef();
-    const emailRef = useRef();
     const errRef = useRef();
 
     const [user, userReset, userAttributes] = useInput("username", "");
@@ -26,9 +28,6 @@ const Login = () => {
     const [pwd, setPwd] = useState("");
     const [errMsg, setErrMsg] = useState("");
 
-    useEffect(() => {
-        userRef.current.focus();
-    }, [])
 
     useEffect(() => {
         setErrMsg("");
@@ -76,36 +75,31 @@ const Login = () => {
             <div className="sign-in-container">
                 <div className="sign-in-header">Hey! Nice to see you again!</div>
                 <form className="sign-in-form" onSubmit={handleSubmit}>
-                    <input
+                    <AuthInput
                         type="text"
                         id="username"
-                        ref={userRef}
                         autoComplete="off"
                         {...userAttributes}
-                        required
                         placeholder="username"
-                        className="input"
+                        valid={true}
                     />
-                    <input
+                    <AuthInput
                         type="text"
                         id="email"
-                        ref={emailRef}
                         autoComplete="off"
                         {...emailAttributes}
-                        required
                         placeholder="email"
-                        className="input"
+                        valid={true}
                     />
-                    <input
+                    <AuthInput
                         type="password"
                         id="password"
                         value={pwd}
                         onChange={(e) => setPwd(e.target.value)}
-                        required
                         placeholder="password"
-                        className="input"
+                        valid={true}
                     />
-                    <button disabled={!(user && pwd && email)} className="sing-in-btn">Sign in</button>
+                    <AuthButton disabled={!(user && pwd && email)} className="sing-in-btn">Sign in</AuthButton>
                 </form>
 
                 <div className="link-to-sing-up">
@@ -114,7 +108,7 @@ const Login = () => {
                 </div>
             </div>
             <div className="tips-container">
-                <p ref={errRef} className="tips" aria-live="assertive">{errMsg}</p>
+                <Info>{errMsg}</Info>
             </div>
 
         </section>

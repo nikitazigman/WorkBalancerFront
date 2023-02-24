@@ -66,7 +66,11 @@ function Header(props) {
               </div>
             </div>
             :
-            <NavLink to={config.links.sign_in}>SignIn</NavLink>
+            <>
+              <NavLink to={config.links.sign_in}>SignIn</NavLink>
+              /
+              <NavLink to={config.links.sign_up}>SignUp</NavLink>
+            </>
         }
       </div>
     </nav >

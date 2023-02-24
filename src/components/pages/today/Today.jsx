@@ -6,6 +6,7 @@ import useTasks from "../../../hooks/useTasks"
 
 // import TaskForm from "../../common/task_form/TaskForm";
 import Task from "../../common/task/Task";
+import TaskForm from '../../common/task_form/TaskForm';
 
 import config from '../../../configs/config';
 
@@ -55,36 +56,37 @@ function Today() {
     const [getTasks,] = useTasks();
 
     const [tasks, setTasks] = useState(test_tasks);
-    // const [options, setOptions] = useState([]);
-
-    console.log(tasks)
 
     const onChange = (prop_obj, id) => {
-        console.log("on change")
-        console.log(prop_obj)
-        console.log(id)
-
         setTasks(
             (tasks) => {
                 return tasks.map((task) => {
-                    return task.id == id ? { ...task, ...prop_obj } : task;
+                    return task.id === id ? { ...task, ...prop_obj } : task;
                 })
             }
         )
     }
     const onComplete = (id) => {
-        console.log(`completing ${id}`)
         setTasks(
             (tasks) => {
                 return tasks.map((task) => {
-                    return task.id == id ? { ...task, completed: !task.completed } : task;
+                    return task.id === id ? { ...task, completed: !task.completed } : task;
                 })
             }
         )
     }
-    const onArchived = (id) => { console.log(`archiving ${id}`) }
+    const onArchived = (id) => {
+        setTasks(
+            tasks => tasks.filter(task => task.id !== id)
+        )
+    }
     const onUpdate = (id) => { console.log(`updating ${id}`) }
-
+    const onCreate = (task) => {
+        setTasks(tasks => {
+            const new_task = { ...task, id: tasks[tasks.length - 1].id + 1 }
+            return [...tasks, new_task]
+        })
+    }
     useEffect(() => {
         const requestTasks = async () => {
             console.log("getting today id");
@@ -99,18 +101,6 @@ function Today() {
 
     return (
         <section className='today-section'>
-            {/* <TaskForm
-                date={today}
-                tasks={tasks}
-                setTasks={setTasks}
-                options={options}
-                setOptions={setOptions}
-            /> */}
-            {/* {
-                tasks.map((task) => {
-                    return <Task {...task} />
-                })
-            } */}
             <div className="tasks-container">
                 {tasks.map((task) => {
                     return (
@@ -125,6 +115,7 @@ function Today() {
                     )
                 })}
             </div>
+            <TaskForm showOptions={true} onCreate={onCreate} />
         </section>
     )
 }

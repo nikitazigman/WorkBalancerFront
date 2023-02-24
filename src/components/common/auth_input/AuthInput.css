@@ -1,0 +1,25 @@
+.auth-input:focus {
+    outline: 1px solid #0B0A07;
+    box-shadow: 0px 4px 0px #0B0A07;
+}
+
+.auth-input::placeholder {
+    color: #0B0A07;
+}
+
+.auth-input {
+    padding: 17px 35px;
+    width: 100%;
+
+    background: #FFFFFF;
+    border: 2px solid #0B0A07;
+    border-radius: 17px;
+
+    font-size: 24px;
+    text-align: center;
+    color: #0B0A07;
+}
+
+.invalid {
+    color: rgba(11, 10, 7, 0.3);
+}

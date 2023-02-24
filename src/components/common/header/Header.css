@@ -1,11 +1,12 @@
 .nav {
+  width: 1116px;
+  height: 58px;
+  margin: 20px auto 0px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 50px;
-  margin-left: 162px;
-  margin-right: 162px;
-  margin-top: 60px;
 
   font-weight: 400;
   font-size: 25px;

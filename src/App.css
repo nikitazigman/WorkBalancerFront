@@ -12,18 +12,46 @@ body {
   background: #ffffff;
 }
 
-.AppContainer {
-  margin: 0px auto;
-}
-
 input {
   font-size: 24px;
   text-align: center;
   color: #0B0A07;
 }
 
-input:focus {
-  outline: 1px solid #0B0A07;
-  /* border: 3px solid #0B0A07; */
-  box-shadow: 0px 4px 0px #0B0A07;
+.AppContainer {
+  margin: 0px auto;
+}
+
+.task-input {
+  width: 100%;
+  text-align: left;
+  padding: 0px;
+  margin: 0px;
+  color: #0B0A07;
+
+  background: transparent;
+  border: none;
+}
+
+.task-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.task-input::placeholder {
+  color: #0B0A07;
+}
+
+.input-deadline {
+  text-align: center;
+  width: 150px;
+}
+
+.input-level {
+  text-align: center;
+  width: 30px;
+}
+
+.input-edit-mode {
+  border-bottom: 2px solid #0B0A07;
 }

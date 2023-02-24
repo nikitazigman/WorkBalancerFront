@@ -1,0 +1,15 @@
+.auth-btn:disabled {
+    text-decoration: line-through;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 17px 35px;
+    background: #0B0A07;
+    border-radius: 17px;
+    border: 0;
+
+    font-size: 24px;
+    text-align: center;
+    color: #FFFFFF;
+}

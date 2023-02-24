@@ -1,5 +1,9 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AuthInput from "../../common/auth_input/AuthInput";
+import AuthButton from "../../common/auth_btn/AuthButton";
+import Info from "../../common/info/Info";
+
 
 import validator from "validator"
 
@@ -11,9 +15,6 @@ import "./SignUp.css";
 
 const Register = () => {
     const navigate = useNavigate()
-
-    const userRef = useRef()
-    const errRef = useRef()
 
     const [user, setUser] = useState("")
     const [validName, setValidName] = useState(false)
@@ -33,10 +34,6 @@ const Register = () => {
     const [matchPwdFocus, setMatchPwdFocus] = useState(false)
 
     const [errMsg, setErrMsg] = useState("")
-
-    useEffect(() => {
-        userRef.current.focus()
-    }, [])
 
     useEffect(() => {
         const result = validator.isAlphanumeric(user) && (user.length > 3 && user.length < 24)
@@ -102,7 +99,6 @@ const Register = () => {
             } else {
                 setErrMsg("Oops. Something went wrong. Please try again in several minutes");
             }
-            errRef.current.focus();
         }
     }
 
@@ -112,60 +108,52 @@ const Register = () => {
                 <div className="sign-up-header">Hey! Nice to meet you!</div>
 
                 <form className="sign-up-form" onSubmit={handleSubmit}>
-                    <input
+                    <AuthInput
                         type="text"
                         id="username"
-                        ref={userRef}
-                        autoComplete="off"
                         onChange={(e) => setUser(e.target.value)}
-                        required
                         aria-invalid={validName ? "false" : "true"}
                         aria-describedby="uidnote"
                         onFocus={() => setUserFocus(true)}
                         onBlur={() => setUserFocus(false)}
                         placeholder="username"
-                        className={"input " + (user && validName ? "" : "invalid")}
+                        valid={user && validName}
                     />
-                    <input
+                    <AuthInput
                         type="text"
                         id="email"
-                        autoComplete="off"
                         onChange={(e) => setEmail(e.target.value)}
-                        required
                         aria-invalid={validEmail ? "false" : "true"}
                         aria-describedby="uidnote"
                         onFocus={() => setEmailFocus(true)}
                         onBlur={() => setEmailFocus(false)}
                         placeholder="email"
-                        className={"input " + (email && validEmail ? "" : "invalid")}
+                        valid={email && validEmail}
                     />
-                    <input
+                    <AuthInput
                         type="password"
                         id="pwd"
-                        autoComplete="off"
                         onChange={(e) => setPwd(e.target.value)}
-                        required
                         aria-invalid={validPwd ? "false" : "true"}
                         aria-describedby="uidnote"
                         onFocus={() => setPwdFocus(true)}
                         onBlur={() => setPwdFocus(false)}
                         placeholder="password"
-                        className={"input " + (pwd && validPwd ? "" : "invalid")}
+                        valid={pwd && validPwd}
+
                     />
-                    <input
+                    <AuthInput
                         type="password"
                         id="confirm_pwd"
-                        autoComplete="off"
                         onChange={(e) => setMatchPwd(e.target.value)}
-                        required
                         aria-invalid={validMatchPwd ? "false" : "true"}
                         aria-describedby="uidnote"
                         onFocus={() => setMatchPwdFocus(true)}
                         onBlur={() => setMatchPwdFocus(false)}
                         placeholder="confirm password"
-                        className={"input " + (matchPwd && validMatchPwd ? "" : "invalid")}
+                        valid={matchPwd && validMatchPwd}
                     />
-                    <button disabled={!(validName && validPwd && validMatchPwd)} className="sing-up-btn">Sign up</button>
+                    <AuthButton disabled={!(validName && validPwd && validMatchPwd)} className="sing-up-btn">Sign up</AuthButton>
                 </form>
                 <div className="link-to-sing-in">
                     Already have an account? <Link to={config.links.sign_in}><strong>Sign In</strong></Link>
@@ -174,20 +162,20 @@ const Register = () => {
             <div className="tips-container">
                 {
                     userFocus && user && !validName &&
-                    <p id="uidnote" className="tips">
+                    <Info>
                         4 to 24 characters. Must begin with a letter.
                         Only alphanumeric symbols are allowed.
-                    </p>
+                    </Info>
                 }
                 {
                     emailFocus && email && !validEmail &&
-                    <p id="uidemail" className="tips">
+                    <Info>
                         Provided email has wrong format. Please correct it.
-                    </p>
+                    </Info>
                 }
                 {
                     pwdFocus && pwd && !validPwd &&
-                    <p id="pwdnote" className="tips">
+                    <Info>
                         8 to 24 characters.
                         Must include uppercase and lowercase letters,
                         a number and a special character.
@@ -197,15 +185,15 @@ const Register = () => {
                         <span aria-label="hashtag">#</span>
                         <span aria-label="dollar sign">$</span>
                         <span aria-label="percent">%</span>
-                    </p>
+                    </Info>
                 }
                 {
                     matchPwdFocus && matchPwd && !validMatchPwd &&
-                    <p id="pwdnote" className="tips">
+                    <Info>
                         Provided passwords are not equal. Please check it out.
-                    </p>
+                    </Info>
                 }
-                <p ref={errRef} className="tips" aria-live="assertive">{errMsg}</p>
+                <Info>{errMsg}</Info>
             </div>
 
 

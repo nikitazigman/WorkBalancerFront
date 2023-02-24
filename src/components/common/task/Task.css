@@ -11,7 +11,7 @@
 
 .task-section .tips-container {
   width: 100%;
-  height: 30px;
+  height: fit-content;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -29,7 +29,7 @@
 
 
 .task-section .form-container {
-  height: 60px;
+  height: 57px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -64,23 +64,6 @@
   justify-content: center;
   align-items: center;
   gap: 30px;
-}
-
-.task-section .task-input {
-  width: 100%;
-  text-align: left;
-  padding: 0px;
-  margin: 0px;
-  color: #0B0A07;
-  width: max-content;
-  background: transparent;
-  border: none;
-}
-
-.task-section .task-input:focus {
-  outline: none;
-  /* border-bottom: 2px solid #0B0A07; */
-  box-shadow: none;
 }
 
 .task-section .task-done {
@@ -123,6 +106,7 @@
 .task-section .form-container:hover .task-btn {
   box-shadow: 0px 4px 0px #0B0A07;
 }
+
 
 .task-section .form-container:hover .task-container {
   box-shadow: 0px 4px 0px #0B0A07;

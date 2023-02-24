@@ -1,14 +1,16 @@
 .today-section {
   width: 832px;
   height: fit-content;
-  margin: auto;
+
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 60px 30px;
-  gap: 100px;
+  gap: 50px;
+
+  margin: 0px auto;
+  margin-top: 95px;
 }
 
 .today-section .tasks-container {

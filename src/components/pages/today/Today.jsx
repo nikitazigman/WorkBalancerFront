@@ -87,6 +87,11 @@ function Today() {
             return [...tasks, new_task]
         })
     }
+    const onAdd = (task) => {
+        setTasks(tasks => {
+            return [...tasks, task];
+        })
+    }
     useEffect(() => {
         const requestTasks = async () => {
             console.log("getting today id");
@@ -115,7 +120,11 @@ function Today() {
                     )
                 })}
             </div>
-            <TaskForm showOptions={true} onCreate={onCreate} />
+            <TaskForm
+                showOptions={true}
+                onCreate={onCreate}
+                onAdd={onAdd}
+            />
         </section>
     )
 }

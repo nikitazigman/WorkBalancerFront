@@ -9,7 +9,7 @@ const Info = ({ children, ...props }) => {
             {
                 children &&
                 <>
-                    <img className="info-icon" src={infoIcon} alt="info" />
+                    <img className={infoIcon} src={infoIcon} alt="info" />
                     <p className="info" aria-live="assertive">
                         {children}
                     </p>

@@ -79,15 +79,19 @@ function TaskForm({ showOptions, onCreate, onAdd, ...props }) {
         setOptions(options => options.filter(option => option.id != task.id));
     }
 
-    const autocompleteOptions = options.map(option => {
-        if (option.title.includes(task.title)) {
-            return <Option
-                key={option.id}
-                task={option}
-                onClick={handleOnAdd}
-            />
-        }
-    })
+    const autocompleteOptions = options
+        .filter(
+            option => option.title.includes(task.title)
+        )
+        .map(
+            option => {
+                return <Option
+                    key={option.id}
+                    task={option}
+                    onClick={handleOnAdd}
+                />
+            }
+        )
 
     return (
         <section className="task-form-section">

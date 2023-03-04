@@ -1,93 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
-// import { TaskForm, TasksList } from "../../common";
+
+import useTasks from "../../../hooks/useTasks"
+import Task from "../../common/task/Task";
+import TaskForm from '../../common/task_form/TaskForm';
+
+import config from '../../../configs/config';
+
 import './Backlog.css';
 
 
-// const BACKLOG_TASKS_LIST = "api/task/list/?completed=false";
-
 function Backlog() {
-    // const [tasks, setTasks] = useState([]);
+    const [tasks, taskMethods] = useTasks();
 
-    // const axiosPrivate = useAxiosPrivate();
-    // const navigate = useNavigate();
-    // const location = useLocation();
+    useEffect(() => {
+        taskMethods.getBacklogTasks()
+    }, [])
 
-    // // console.log("render backlog page")
+    return (
+        <section className='backlog-section'>
+            <TaskForm showOptions={false} onCreate={taskMethods.onCreate} onAdd={taskMethods.onAdd} />
 
-    // useEffect(() => {
-    //     let isMounted = true;
-    //     const controller = new AbortController();
-
-    //     const getTasks = async () => {
-    //         try {
-    //             const response = await axiosPrivate.get(BACKLOG_TASKS_LIST, {
-    //                 signal: controller.signal
-    //             });
-    //             isMounted && setTasks(response.data)
-    //         } catch (error) {
-    //             if (error.name !== "CanceledError") {
-    //                 console.log("got error");
-    //                 console.log(error);
-    //                 navigate("/login", { state: { from: location }, replace: true });
-    //             }
-    //         }
-    //     }
-
-    //     getTasks();
-
-    //     return () => {
-    //         isMounted = false;
-    //         controller.abort();
-    //     }
-    // }, [])
-
-    // const updateTaskProps = (event, updatedTask) => {
-    //     const updatedTasks = tasks.map((task) => {
-    //         if (task.id === updatedTask.id) {
-    //             return { ...task, [event.target.name]: event.target.value };
-    //         }
-    //         return task;
-    //     })
-    //     setTasks(updatedTasks)
-    // }
-
-    // const SubmitUpdatedTask = (task) => {
-    //     const updateTask = async () => {
-    //         try {
-    //             const response = await axiosPrivate.put(`/api/task/${task.id}/`,
-    //                 JSON.stringify(task),
-    //                 {
-    //                     headers: { "Content-Type": "application/json" }
-    //                 }
-    //             )
-    //             return response?.status === 200;
-    //         } catch (error) {
-    //             console.log("got error during task updating");
-    //             console.log(error);
-    //             return false;
-    //         }
-    //     }
-
-    //     updateTask();
-    //     // console.log("task is submitted")
-    // }
-
-    // return (
-    //     <section className='today-section'>
-    //         <TaskForm tasks={tasks} setTasks={setTasks} />
-    //         <TasksList
-    //             showLevel={true}
-    //             tasks={tasks}
-    //             onClick={null}
-    //             onChange={updateTaskProps}
-    //             setTasks={setTasks}
-    //             onSubmit={SubmitUpdatedTask}
-    //         />
-    //     </section>
-    // )
-    return <></>
+            <div className="tasks-container">
+                {tasks.map((task) => {
+                    return (
+                        <Task
+                            key={task.id}
+                            task={task}
+                            onArchived={taskMethods.onArchived}
+                            onChange={taskMethods.onChange}
+                            onUpdate={taskMethods.onUpdate}
+                        />
+                    )
+                })}
+            </div>
+        </section>
+    )
 }
 
 export default Backlog

@@ -73,7 +73,6 @@ function TaskForm({ showOptions, onCreate, onAdd, ...props }) {
         errMsg.length == 0 && onCreate({ ...task });
         setTask(EMPTY_TASK);
     }
-
     const handleOnAdd = (task) => {
         onAdd(task);
         setOptions(options => options.filter(option => option.id != task.id));
@@ -97,7 +96,7 @@ function TaskForm({ showOptions, onCreate, onAdd, ...props }) {
         <section className="task-form-section">
             <div className="form-container">
                 {task.title && task.level && task.deadline && <Info>{errMsg}</Info>}
-                <form onSubmit={handleTaskFormAction} className="task-form-container">
+                <form onSubmit={handleTaskFormAction} className={`task-form-container  ${showOptions ? "" : "without-options"}`}>
                     <input type="submit" hidden />
                     <div className="title-container">
                         <input

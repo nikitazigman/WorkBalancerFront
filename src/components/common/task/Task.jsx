@@ -33,9 +33,6 @@ function Task({ task, onChange, onComplete, onArchived, onUpdate }) {
 
     const taskClassName = `task-input ${task.completed ? "task-done" : ""} ${editMode ? "input-edit-mode" : ""}`
 
-    console.log(`task active ${editMode}`)
-
-
     return (
         <section className="task-section">
             <div className="form-container">
@@ -81,17 +78,22 @@ function Task({ task, onChange, onComplete, onArchived, onUpdate }) {
 
                 <div className="buttons-container">
 
-                    <button className={"task-btn" + ` ${task.completed}`} onClick={() => onComplete(task.id)}>
-                        <img className="task-btn-icon" src={complete_icon} alt="complete" />
-                    </button>
+                    {onComplete &&
+                        <button className={"task-btn" + ` ${task.completed}`} onClick={() => onComplete(task.id)}>
+                            <img className="task-btn-icon" src={complete_icon} alt="complete" />
+                        </button>
+                    }
+                    {onUpdate &&
+                        <button className={"task-btn" + ` ${editMode}`} onClick={handleEdit}>
+                            <img className="task-btn-icon" src={edit_icon} alt="edit" />
+                        </button>
+                    }
 
-                    <button className={"task-btn" + ` ${editMode}`} onClick={handleEdit}>
-                        <img className="task-btn-icon" src={edit_icon} alt="edit" />
-                    </button>
-
-                    <button className="task-btn" onClick={() => onArchived(task.id)}>
-                        <img className="task-btn-icon" src={archived_icon} alt="archived" />
-                    </button>
+                    {onArchived &&
+                        <button className="task-btn" onClick={() => onArchived(task.id)}>
+                            <img className="task-btn-icon" src={archived_icon} alt="archived" />
+                        </button>
+                    }
 
                 </div>
 

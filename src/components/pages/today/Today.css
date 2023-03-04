@@ -9,8 +9,7 @@
   align-items: center;
   gap: 50px;
 
-  margin: 0px auto;
-  margin-top: 95px;
+  margin: 95px auto;
 }
 
 .today-section .tasks-container {

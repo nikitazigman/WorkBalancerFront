@@ -48,5 +48,5 @@
 }
 
 .option-section .option-prop {
-    width: fit-content;
+    width: max-content;
 }

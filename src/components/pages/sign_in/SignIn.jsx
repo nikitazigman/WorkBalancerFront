@@ -1,9 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
-import axios from "../../../api/axios";
 import useInput from "../../../hooks/useInput";
-import useAuth from "../../../hooks/useAuth";
+import useAuthAPI from "../../../hooks/useAuthAPI";
 
 import AuthInput from "../../common/auth_input/AuthInput";
 import AuthButton from "../../common/auth_btn/AuthButton";
@@ -16,57 +15,21 @@ import "./SignIn.css";
 
 const Login = () => {
     const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
 
-    const { setAuth } = useAuth();
-
-    const errRef = useRef();
-
-    const [user, userReset, userAttributes] = useInput("username", "");
-    const [email, emailReset, emailAttributes] = useInput("email", "");
+    const [user, userReset, userAttributes] = useInput("");
+    const [email, emailReset, emailAttributes] = useInput("");
     const [pwd, setPwd] = useState("");
-    const [errMsg, setErrMsg] = useState("");
 
-
-    useEffect(() => {
-        setErrMsg("");
-    }, [user, pwd, email])
+    const [errMsg, { signIn }] = useAuthAPI()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const result = await signIn({ user, pwd, email })
+        result && navigate(config.links.today, { replace: true });
 
-        try {
-            const credentials = JSON.stringify({
-                username: user,
-                email: email,
-                password: pwd
-            })
-            console.log(credentials)
-            await axios.post(
-                config.api.sign_in,
-                credentials,
-                {
-                    headers: { "Content-Type": "application/json" },
-                    withCredentials: true
-                },
-            );
-
-            setAuth({ user, email })
-            userReset();
-            emailReset();
-            setPwd("");
-            navigate(from, { replace: true });
-        } catch (error) {
-            if (!error?.response) {
-                setErrMsg("Cannot get response from server. Please try again in a minute.");
-            } else if (error.response?.status === 401) {
-                setErrMsg("Seems like you provided wrong credentials.");
-            } else {
-                setErrMsg("Oops. Sign in was failed. I do not know what was the issue.");
-            }
-            errRef.current.focus();
-        }
+        setPwd("");
+        userReset();
+        emailReset();
     }
 
 

@@ -12,6 +12,7 @@ const Config = {
         sign_in: "/api/v1/auth/login/",
         sign_up: "/api/v1/auth/registration/",
         logout: "/api/v1/auth/logout/",
+        user: "/api/v1/auth/user/",
         tasks: "/api/v1/tasks/",
         backlog_tasks: "/api/v1/tasks/?completed=false",
         days: "/api/v1/days/",

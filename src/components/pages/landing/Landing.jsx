@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import githubIcon from "../../../imgs/github_icon.svg"
 import figmaIcon from "../../../imgs/figma_icon.svg"
 import telegramIcon from "../../../imgs/telegram_icon.png"
 import emailIcon from "../../../imgs/email_icon.svg"
 import authorPhoto from "../../../imgs/author_photo.png"
-import landingImage from "../../../imgs/landing_image.svg"
+import landingImage from "../../../imgs/landing_image.png"
 import backlogScreen from "../../../imgs/backlog_example_image.png"
 
 import config from "../../../configs/config"
@@ -16,8 +16,10 @@ import "./Landing.css"
 
 
 function Landing() {
-    const handleSignUp = (event) => {
+    const navigate = useNavigate()
 
+    const handleSignUp = (event) => {
+        navigate(config.links.sign_up);
     }
 
     return (

@@ -2,74 +2,31 @@ import { useEffect, useState } from 'react';
 
 import useAxiosPrivate from './useAxiosPrivate';
 import axios from '../api/axios';
-import useToday from './useToday';
 import config from "../configs/config"
-
-const TestTasks = [
-    {
-        archived: false,
-        completed: true,
-        days: [422, 431, 429, 427, 430, 423, 428, 424, 425],
-        deadline: "1972-12-16",
-        id: 762,
-        level: 1,
-        title: "test_new_title"
-    },
-    {
-        archived: false,
-        completed: false,
-        days: [422, 431, 429, 427, 430, 423, 428, 424, 425],
-        deadline: "1972-12-11",
-        id: 763,
-        level: 3,
-        title: "test1_new_title"
-    },
-    {
-        archived: false,
-        completed: true,
-        days: [422, 431, 429, 427, 430, 423, 428, 424, 425],
-        deadline: "1972-12-14",
-        id: 764,
-        level: 5,
-        title: "test2_new_title asdasdlkajsdkljahsd a asjdha"
-    },
-    {
-        archived: false,
-        completed: true,
-        days: [422, 431, 429, 427, 430, 423, 428, 424, 425],
-        deadline: "1972-12-19",
-        id: 765,
-        level: 4,
-        title: "test3_new_title"
-    }
-]
 
 
 const useTasks = () => {
     const axiosPrivate = useAxiosPrivate();
     const [tasks, setTasks] = useState([]);
 
-    // const checkError = (error) => {
-    //     if (error.name !== "CanceledError") {
-    //         navigate(config.links.sign_in, { state: { from: location }, replace: true });
-    //     }
-    // }
+    const getTasks = async ({ filter_days, archived, completed, exclude_days }) => {
 
-    // const getTasks = async (day, completed) => {
-    //     try {
-    //         day = day ? day : "";
-    //         completed = completed ? completed : ""
+        const taskUrl = `${config.api.tasks}?completed=${completed}&archived=${archived}`;
+        const full_url =
+            taskUrl +
+            (filter_days ? `&days=${filter_days}` : "") +
+            (exclude_days ? `&exclude_days=${exclude_days}` : "");
 
-    //         const tasks_list_response = await axiosPrivate.get(`${config.api.tasks}?days=${day}&completed=${completed}`);
-    //         return tasks_list_response.data
 
-    //     } catch (error) {
-    //         checkError(error)
-    //     }
-    // }
 
-    const getTasks = async () => {
-        setTasks(TestTasks)
+        console.log("get tasks url: %s", full_url);
+        try {
+            const response = await axiosPrivate.get(full_url);
+            console.log(response);
+            response.status === 200 && setTasks(response.data);
+        } catch (error) {
+            console.log(error);
+        }
     }
     const onChange = (prop_obj, id) => {
         setTasks(
@@ -81,28 +38,137 @@ const useTasks = () => {
         )
     }
     const onComplete = (id) => {
-        setTasks(
-            (tasks) => {
-                return tasks.map((task) => {
-                    return task.id === id ? { ...task, completed: !task.completed } : task;
-                })
+        const completeTask = async () => {
+            const full_url = `${config.api.tasks}${id}/`
+
+            const task = tasks.filter(task => task.id === id)[0];
+
+            const payload = JSON.stringify(
+                { completed: !task.completed }
+            );
+            console.log(task, payload);
+            try {
+                const response = await axiosPrivate.patch(full_url,
+                    payload,
+                    {
+                        headers: { "Content-Type": "application/json" },
+                    }
+                )
+                console.log(response)
+                response.status === 200 && setTasks(
+                    (tasks) => {
+                        return tasks.map((task) => {
+                            return task.id === id ? { ...task, completed: !task.completed } : task;
+                        })
+                    }
+                )
+            } catch (error) {
+                console.log(error)
             }
-        )
+        }
+
+        completeTask();
     }
     const onArchived = (id) => {
-        setTasks(
-            tasks => tasks.filter(task => task.id !== id)
-        )
+        const archiveTask = async () => {
+            const full_url = `${config.api.tasks}${id}/`
+
+            const payload = JSON.stringify(
+                { archived: true }
+            );
+
+            try {
+                const response = await axiosPrivate.patch(full_url,
+                    payload,
+                    {
+                        headers: { "Content-Type": "application/json" },
+                    }
+                )
+                console.log(response)
+                response.status === 200 && setTasks(
+                    tasks => tasks.filter(task => task.id !== id)
+                )
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        archiveTask();
+
     }
-    const onUpdate = (id) => { console.log(`updating ${id}`) }
+    const onUpdate = (id) => {
+        const updateTask = async () => {
+            const full_url = `${config.api.tasks}${id}/`
+            const task = tasks.filter(task => task.id === id)[0];
+            const payload = JSON.stringify(task);
+
+            try {
+                const response = await axiosPrivate.patch(full_url,
+                    payload,
+                    {
+                        headers: { "Content-Type": "application/json" },
+                    }
+                )
+                console.log(response)
+                return true;
+
+            } catch (error) {
+                console.log(error)
+                return false;
+            }
+        }
+
+        updateTask();
+    }
     const onCreate = (task) => {
-        setTasks(tasks => {
-            const new_task = { ...task, id: tasks[tasks.length - 1].id + 1 }
-            return [...tasks, new_task]
-        })
+        const createTask = async () => {
+            const full_url = `${config.api.tasks}`
+            const payload = JSON.stringify(task);
+
+            try {
+                const response = await axiosPrivate.post(full_url,
+                    payload,
+                    {
+                        headers: { "Content-Type": "application/json" },
+                    }
+                );
+
+                console.log(response.status);
+                response.status === 201 && setTasks(tasks => [...tasks, response.data])
+
+                return true;
+
+            } catch (error) {
+                console.log(error)
+                return false;
+            }
+        }
+
+        createTask();
     }
-    const onAdd = (task) => {
-        setTasks(tasks => [...tasks, task])
+    const onAdd = (task, dayId) => {
+        const addTask = async () => {
+            const full_url = `${config.api.tasks}${task.id}/`;
+            const payload = JSON.stringify(
+                { days: task.days ? [...task.days, dayId] : [dayId] }
+            );
+
+            try {
+                const response = await axiosPrivate.patch(full_url,
+                    payload,
+                    {
+                        headers: { "Content-Type": "application/json" },
+                    }
+                );
+                response.status === 200 && setTasks(tasks => [...tasks, response.data]);
+                return true;
+
+            } catch (error) {
+                console.log(error);
+                return false;
+            }
+        }
+        addTask()
     }
 
     const taskMethods = {
@@ -111,12 +177,11 @@ const useTasks = () => {
         onArchived: onArchived,
         onUpdate: onUpdate,
         onCreate: onCreate,
-        getTodayTasks: getTasks,
-        getBacklogTasks: getTasks,
+        getTasks: getTasks,
         onAdd: onAdd
     }
 
-    return [tasks, taskMethods]
+    return [{ tasks, setTasks }, taskMethods]
 }
 
 export default useTasks;

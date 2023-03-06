@@ -16,8 +16,8 @@ const Option = ({ task, onClick, ...option }) => {
             <div className="option-container">
                 <span className="option-title">{task.title}</span>
                 <div className="option-props">
-                    <span className="option-prop">{task.level}</span>
-                    <span className="option-prop">{task.deadline}</span>
+                    <div className="option-prop">{task.level}</div>
+                    <div className="option-prop">{task.deadline}</div>
                 </div>
             </div>
         </section>

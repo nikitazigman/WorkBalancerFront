@@ -25,13 +25,13 @@ function App() {
           <Route path={config.links.sign_up} element={<SignUp />} />
           <Route path={config.links.sign_in} element={<SignIn />} />
           {/* protected routes */}
-          {/* <Route element={<PersistLogin />}> */}
-          {/* <Route element={<RequireAuth />}> */}
-          <Route path={config.links.history} element={<History />} />
-          <Route path={config.links.backlog} element={<Backlog />} />
-          <Route path={config.links.today} element={<Today />} />
-          {/* </Route> */}
-          {/* </Route> */}
+          <Route element={<PersistLogin />}>
+            <Route element={<RequireAuth />}>
+              {/* <Route path={config.links.history} element={<History />} /> */}
+              <Route path={config.links.backlog} element={<Backlog />} />
+              <Route path={config.links.today} element={<Today />} />
+            </Route>
+          </Route>
 
         </Route>
       </Routes>

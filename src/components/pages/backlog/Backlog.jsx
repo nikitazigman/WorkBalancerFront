@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { useDays } from '../../../hooks/useDays';
+
 import useTasks from "../../../hooks/useTasks"
 import Task from "../../common/task/Task";
 import TaskForm from '../../common/task_form/TaskForm';
@@ -11,18 +13,25 @@ import './Backlog.css';
 
 
 function Backlog() {
-    const [tasks, taskMethods] = useTasks();
+    const [backlog, taskMethods] = useTasks();
+    const [{ }, { getToday }] = useDays();
+
 
     useEffect(() => {
-        taskMethods.getBacklogTasks()
+        const getBacklogTasks = async () => {
+            const today = await getToday()
+            await taskMethods.getTasks({ exclude_days: today.id, archived: false, completed: false });
+        }
+
+        getBacklogTasks();
     }, [])
 
     return (
         <section className='backlog-section'>
-            <TaskForm showOptions={false} onCreate={taskMethods.onCreate} onAdd={taskMethods.onAdd} />
+            <TaskForm options={[]} onCreate={taskMethods.onCreate} onAdd={taskMethods.onAdd} />
 
             <div className="tasks-container">
-                {tasks.map((task) => {
+                {backlog.tasks.map((task) => {
                     return (
                         <Task
                             key={task.id}

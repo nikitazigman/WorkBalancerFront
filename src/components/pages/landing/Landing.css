@@ -1,14 +1,13 @@
 .landing-section {
-  width: 100%;
+  margin: 0px auto;
+  width: 1116px;
   padding-bottom: 300px;
 
   height: fit-content;
 }
 
 .landing-section .greeting-section {
-  width: 100%;
-  padding: 100px 0px 100px 10vw;
-  background: #FFE7E7;
+  padding: 100px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -72,8 +71,6 @@
 
 
 .landing-section .project-section {
-  margin: 0px auto;
-  width: 1116px;
   padding: 100px 0px;
 }
 

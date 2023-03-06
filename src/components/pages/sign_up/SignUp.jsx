@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+
 import AuthInput from "../../common/auth_input/AuthInput";
 import AuthButton from "../../common/auth_btn/AuthButton";
 import Info from "../../common/info/Info";
-
+import useAuthAPI from "../../../hooks/useAuthAPI";
 
 import validator from "validator"
 
-import axios from "../../../api/axios";
 import config from "../../../configs/config";
-
 import "./SignUp.css";
 
 
 const Register = () => {
     const navigate = useNavigate()
+    const [apiErrMsg, { signUp }] = useAuthAPI()
 
     const [user, setUser] = useState("")
     const [validName, setValidName] = useState(false)
@@ -34,6 +35,7 @@ const Register = () => {
     const [matchPwdFocus, setMatchPwdFocus] = useState(false)
 
     const [errMsg, setErrMsg] = useState("")
+
 
     useEffect(() => {
         const result = validator.isAlphanumeric(user) && (user.length > 3 && user.length < 24)
@@ -58,48 +60,12 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const result = await signUp({ user, email, pwd, matchPwd })
+        result && navigate(config.links.sign_in, { replace: true })
 
-        try {
-            const credentials = JSON.stringify({
-                username: user,
-                email: email,
-                password1: pwd,
-                password2: matchPwd
-            })
-            const response = await axios.post(
-                config.api.sign_up,
-                credentials,
-                {
-                    headers: { "Content-Type": "application/json" },
-                    withCredentials: true
-                },
-            )
-
-            if (response.status === 201) {
-                setUser("");
-                setPwd("");
-                setMatchPwd("");
-                navigate(config.links.sign_in, { replace: true })
-            }
-        } catch (error) {
-            if (!error?.response) {
-                setErrMsg("Cannot get a response from the server. Please try again in several minutes.");
-            } else if (error.response.status === 400) {
-                if (error.response.data.email) {
-                    setErrMsg(error.response.data.email);
-                } else if (error.response.data.username) {
-                    setErrMsg(error.response.data.username);
-                } else if (error.response.data.non_field_errors) {
-                    setErrMsg(error.response.data.non_field_errors);
-                }
-                else {
-                    setErrMsg("Seems like provided credentials are not correct.");
-                }
-                console.log(error.response)
-            } else {
-                setErrMsg("Oops. Something went wrong. Please try again in several minutes");
-            }
-        }
+        setUser("");
+        setPwd("");
+        setMatchPwd("");
     }
 
     return (
@@ -193,7 +159,7 @@ const Register = () => {
                         Provided passwords are not equal. Please check it out.
                     </Info>
                 }
-                <Info>{errMsg}</Info>
+                <Info>{apiErrMsg}</Info>
             </div>
 
 

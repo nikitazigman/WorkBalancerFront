@@ -1,5 +1,7 @@
+import url from "./url.json"
+
 const Config = {
-    base_url: "http://localhost:8000",
+    base_url: url.BASE_URL,
     links: {
         sign_in: "/sign-in",
         sign_up: "/sign-up",

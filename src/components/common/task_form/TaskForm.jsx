@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useMatch, useResolvedPath } from "react-router-dom";
 
-import useTasks from "../../../hooks/useTasks"
 import { getTodayDate } from "../../../hooks/useDays";
 import useTaskValidation from "../../../hooks/useTaskValidation";
 
 import Info from "../../common/info/Info";
 import Option from "../../common/option/Option"
 
+import Config from "../../../configs/config";
 import './TaskForm.css';
 
 
@@ -19,6 +20,9 @@ function TaskForm({ backlogTasks, onCreate, onAdd, today, ...props }) {
         title: "",
         days: []
     }
+
+    const resolvedPath = useResolvedPath(Config.links.today)
+    const isTodayPage = useMatch({ path: resolvedPath.pathname, end: true })
 
     const options = backlogTasks || [];
 
@@ -33,7 +37,7 @@ function TaskForm({ backlogTasks, onCreate, onAdd, today, ...props }) {
     const handleTaskFormAction = (event) => {
         event.preventDefault();
 
-        const new_task = options.length > 0 ? { ...task, days: [today.id] } : task;
+        const new_task = isTodayPage ? { ...task, days: [today.id] } : task;
         errMsg.length == 0 && onCreate(new_task);
         setTask(EMPTY_TASK);
     }
@@ -56,7 +60,7 @@ function TaskForm({ backlogTasks, onCreate, onAdd, today, ...props }) {
         <section className="task-form-section">
             <div className="form-container">
                 {task.title && task.level && task.deadline && <Info>{errMsg}</Info>}
-                <form onSubmit={handleTaskFormAction} className={`task-form-container  ${options.length > 0 ? "" : "without-options"}`}>
+                <form onSubmit={handleTaskFormAction} className={`task-form-container  ${isTodayPage ? "" : "without-options"}`}>
                     <input type="submit" hidden />
                     <div className="title-container">
                         <input
@@ -95,7 +99,7 @@ function TaskForm({ backlogTasks, onCreate, onAdd, today, ...props }) {
             </div>
 
             {
-                options.length > 0 && task.title.length > 2 && autocompleteOptions.length > 0 &&
+                isTodayPage && task.title.length > 2 && autocompleteOptions.length > 0 &&
                 <div className="options-container">
                     {autocompleteOptions}
                 </div>

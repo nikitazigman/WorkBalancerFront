@@ -26,7 +26,7 @@ Here is a link to the design : [figma project](https://www.figma.com/file/TO9UUF
 - Define proper architecture and stack of technologies
 - Rewrite using TypeScript
 - Refactoring
-- Allocate time and finnaly learn React or find someone already good at it :smiley:
+- Allocate time to learn the React or find someone already good at it :smiley:
 
 # Getting Started with Create React App
 

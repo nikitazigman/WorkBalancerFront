@@ -1,0 +1,164 @@
+.landing-section {
+  margin: 0px auto;
+  width: 1116px;
+  padding-bottom: 300px;
+
+  height: fit-content;
+}
+
+.landing-section .greeting-section {
+  padding: 100px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.landing-section .greeting-container {
+  width: 540px;
+  height: fit-content;
+}
+
+.landing-section .greeting-title {
+  width: 540px;
+  font-weight: 600;
+  font-size: 64px;
+  margin: 0px;
+
+  -webkit-text-stroke: 1px #0B0A07;
+
+}
+
+.landing-section .ToDo {
+  font-weight: 600;
+  color: #FFC022;
+  -webkit-text-stroke: 1px #0B0A07;
+}
+
+.landing-section .app {
+  font-weight: 600;
+  color: #00B4D8;
+  -webkit-text-stroke: 1px #0B0A07;
+}
+
+.landing-section .greeting-description {
+  margin-top: 20px;
+  padding: 0px;
+
+  font-size: 20px;
+  font-weight: 300;
+}
+
+
+
+.landing-section .SingUp-btn {
+  margin-top: 40px;
+  font-size: 30px;
+  padding: 30px 59px;
+
+  border-radius: 17px;
+  border: 3px solid #0B0A07;
+  box-shadow: 0px 4px 0px #0B0A07;
+  background: #FFC022;
+}
+
+.landing-section .SingUp-btn:active {
+  background: rgba(255, 192, 34, 0.9);
+}
+
+.landing-section .SingUp-btn:hover {
+  cursor: pointer;
+}
+
+
+.landing-section .project-section {
+  padding: 100px 0px;
+}
+
+.landing-section .cards-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.landing-section .card {
+  width: 367px;
+  height: 371px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  gap: 60px;
+
+  background: #FFFFFF;
+  border: 2px solid #0B0A07;
+  border-radius: 17px;
+
+  text-align: center;
+}
+
+.landing-section .card-title {
+  font-size: 30px;
+}
+
+.landing-section .card-text {
+  font-size: 20px;
+}
+
+.landing-section .card-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  gap: 15px;
+}
+
+.landing-section .links-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 3px;
+}
+
+.landing-section .links-container .text {
+  font-size: 20px;
+}
+
+.landing-section .author-card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 20px;
+}
+
+.landing-section .author-photo {
+  width: 367px;
+  height: 371px;
+
+  background: #FFC107;
+  mix-blend-mode: normal;
+  border: 2px solid #0B0A07;
+  border-radius: 17px;
+}
+
+.landing-section .author-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px 50px;
+  gap: 26px;
+
+  width: 740px;
+  height: 371px;
+
+  background: #FFFFFF;
+  border: 2px solid #0B0A07;
+  border-radius: 17px;
+}

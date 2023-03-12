@@ -1,121 +1,108 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import moment from "moment/moment";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+
+import Info from "../../common/info/Info";
+import useTaskValidation from "../../../hooks/useTaskValidation";
+
+import edit_icon from "../../../imgs/edit_icon.svg";
+import complete_icon from "../../../imgs/complete_icon.svg";
+import archived_icon from "../../../imgs/archived_icon.svg";
 import './Task.css';
 
-const TITLE_REGEX = /^[a-zA-Z0-9 ]{0,40}$/
-const LEVEL_REGEX = /^[1-9]{1}$/
-
-function Task({ task, setTasks, onClick, onChange, onSubmit, style, showLevel, ...props }) {
-    const className = task.completed ? "task-props-input task-done" : "task-props-input"
-
-    const [validTitle, setValidTitle] = useState(true);
-    const [titleFocus, setTitleFocus] = useState(false);
-
-    const [validLevel, setValidLevel] = useState(true);
-    const [levelFocus, setLevelFocus] = useState(false);
-
-    const [validDeadline, setValidDeadline] = useState(true);
-    const [deadlineFocus, setDeadlineFocus] = useState(false);
-
-    useEffect(() => {
-        const result = TITLE_REGEX.test(task.title)
-        setValidTitle(result);
-    }, [task.title])
 
 
-    useEffect(() => {
-        const result = LEVEL_REGEX.test(String(task.level))
-        setValidLevel(result);
-    }, [task.level])
+function Task({ task, onChange, onComplete, onArchived, onUpdate }) {
+    const [editMode, setEditMode] = useState(false);
+    const errMsg = useTaskValidation(task)
 
-    useEffect(() => {
-        const date = moment(task.deadline, "YYYY-MM-DD", true)
-        setValidDeadline(date.isValid())
-    }, [task.deadline])
-
-    const handleSubit = (event) => {
-        event.preventDefault();
-        onSubmit && onSubmit(task);
+    const getOnChange = (event) => {
+        editMode && onChange({ [event.target.name]: event.target.value }, task.id);
     }
 
-    return (
-        <form onSubmit={handleSubit}>
-            <input disabled={!(validLevel && validTitle && validDeadline)} type="submit" hidden />
 
-            <div className="task-description" onDoubleClick={onClick ? () => onClick(task) : null} style={style}>
-                <div className="task-title">
-                    <input
-                        name="title"
-                        type="text"
-                        className={className}
-                        value={task.title}
-                        onChange={onChange ? (event) => onChange(event, task) : () => { }}
-                        size={task.title.length}
-                        required
-                        onFocus={() => setTitleFocus(true)}
-                        onBlur={() => setTitleFocus(false)}
-                    />
-                </div>
-                <div className="task-props">
-                    {
-                        showLevel &&
-                        <div className="task-level">
-                            <input
-                                type="text"
-                                name="level"
-                                className={className}
-                                value={task.level}
-                                onChange={onChange ? (event) => onChange(event, task) : () => { }}
-                                size="1"
-                                required
-                                onFocus={() => setLevelFocus(true)}
-                                onBlur={() => setLevelFocus(false)}
-                            />
-                        </div>
-                    }
-                    <div className="task-deadline">
+    const handleEdit = () => {
+        console.log("handle edit button");
+        if (editMode && !errMsg) {
+            onUpdate(task.id);
+            setEditMode((status) => false);
+            return
+        }
+
+        setEditMode((status) => true);
+    }
+
+    const taskClassName = `task-input ${task.completed ? "task-done" : ""} ${editMode ? "input-edit-mode" : ""}`
+
+    return (
+        <section className="task-section">
+            <div className="form-container">
+                <div className={"task-container" + ` ${editMode}`}>
+
+                    <div className="title-container">
                         <input
+                            autoComplete="off"
                             type="text"
-                            name="deadline"
-                            className={className}
-                            value={task.deadline}
-                            onChange={onChange ? (event) => onChange(event, task) : () => { }}
-                            size={task.deadline.length}
+                            name="title"
+                            className={taskClassName}
+                            value={task.title}
+                            maxLength={149}
+                            onChange={getOnChange}
                             required
-                            onFocus={() => setDeadlineFocus(true)}
-                            onBlur={() => setDeadlineFocus(false)}
                         />
                     </div>
+
+                    <div className="task-props-container">
+                        <input
+                            autoComplete="off"
+                            type="text"
+                            name="level"
+                            className={`${taskClassName} input-level`}
+                            value={task.level}
+                            onChange={getOnChange}
+                            size="1"
+                            required
+                        />
+                        <input
+                            autoComplete="off"
+                            type="text"
+                            name="deadline"
+                            className={`${taskClassName} input-deadline`}
+                            value={task.deadline}
+                            onChange={getOnChange}
+                            size="7"
+                            required
+                        />
+                    </div>
+
                 </div>
-            </div >
-            <div className="task-wrong-fromat-notification">
-                {
-                    task.title && titleFocus && !validTitle &&
-                    <p id="title-note" className="instructions">
-                        <FontAwesomeIcon icon={faInfoCircle} />
-                        0 to 40 characters.
-                    </p>
-                }
-                {
-                    task.level && levelFocus && !validLevel &&
-                    <p id="title-note" className="instructions">
-                        <FontAwesomeIcon icon={faInfoCircle} />
-                        only numbers from 1 to 9
-                    </p>
-                }
-                {
-                    task.deadline && deadlineFocus && !validDeadline &&
-                    <p id="title-note" className="instructions">
-                        <FontAwesomeIcon icon={faInfoCircle} />
-                        only date in format YYYY-MM-DD
-                    </p>
-                }
+
+                <div className="buttons-container">
+
+                    {onComplete &&
+                        <button className={"task-btn" + ` ${task.completed}`} onClick={() => onComplete(task.id)}>
+                            <img className="task-btn-icon" src={complete_icon} alt="complete" />
+                        </button>
+                    }
+                    {onUpdate &&
+                        <button className={"task-btn" + ` ${editMode}`} onClick={handleEdit}>
+                            <img className="task-btn-icon" src={edit_icon} alt="edit" />
+                        </button>
+                    }
+
+                    {onArchived &&
+                        <button className="task-btn" onClick={() => onArchived(task.id)}>
+                            <img className="task-btn-icon" src={archived_icon} alt="archived" />
+                        </button>
+                    }
+
+                </div>
+
             </div>
-        </form>
+
+            {editMode && <Info>{errMsg}</Info>}
+        </section>
     )
 }
+
 
 export default Task;

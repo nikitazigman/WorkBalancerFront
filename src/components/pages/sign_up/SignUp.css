@@ -1,0 +1,54 @@
+.sign-up-section {
+    width: 548px;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+
+    margin: 0px auto;
+    margin-top: 95px;
+}
+
+.sing-up-container {
+    width: 100%;
+    height: 531px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+
+    padding: 41px 0px;
+
+    background: #00B4D8;
+    border: 3px solid #0B0A07;
+    border-radius: 17px;
+}
+
+.sign-up-header {
+    font-size: 40px;
+    text-align: center;
+}
+
+.sign-up-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 50px;
+    gap: 12px;
+
+    border-radius: 17px;
+}
+
+.sign-up-form .link-to-sing-in {
+    height: fit-content;
+    font-size: 18px;
+    align-items: center;
+    text-align: center;
+}

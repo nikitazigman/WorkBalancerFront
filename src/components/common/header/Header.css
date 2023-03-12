@@ -1,22 +1,19 @@
 .nav {
-  height: 3.8vh;
-  width: 100;
-  /* background-color: aqua; */
+  width: 1116px;
+  /* padding: 0px 9.6vh; */
+  height: 58px;
+  margin: 20px auto 0px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 2.24vh;
+  gap: 50px;
+
   font-weight: 400;
-  font-size: 1.7vw;
-  line-height: 3.6vh;
+  font-size: 25px;
 }
 
-.nav ul {
-  list-style: none;
-  display: flex;
-}
-
-.nav li.active {
+.nav div.active {
   text-decoration: line-through;
 }
 
@@ -24,42 +21,37 @@
   cursor: pointer;
 }
 
-.nav a {
-  color: inherit;
-  text-decoration: none;
-  height: 100%;
+.nav .logo-container {
   display: flex;
   align-items: center;
-}
-
-.nav-logo {
-  display: flex;
   justify-content: flex-start;
-  gap: 1.6vw;
-  font-style: normal;
-  font-weight: 700;
+  gap: 9px;
 }
 
-.nav-navigation {
-  display: flex;
-  width: 500px;
-  gap: 1.6vw;
+.nav .logo-container .logo-text {
+  height: fit-content;
+
+  font-weight: 500;
+  font-size: 30px;
 }
 
-.nav-account {
+.nav .logo-container .logo-image {
+  width: 50px;
+  height: 33.35px;
+}
+
+.nav .main-pages-container {
   display: flex;
   justify-content: space-between;
+  gap: 50px;
 }
 
-.logo-image {
-  width: 3.8vw;
-  height: 2.5vw;
+.nav a {
+  text-decoration: none;
 }
 
-.user-container {}
-
-.logout-btn:hover {
-  cursor: pointer;
+.account-container {
+  display: flex;
 }
 
 .dropdown-user-menu {
@@ -71,4 +63,10 @@
 
 .user-container:hover .dropdown-user-menu {
   display: block;
+}
+
+.nav .auth-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px
 }

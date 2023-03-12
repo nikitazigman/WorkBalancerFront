@@ -1,26 +1,36 @@
+import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import useAuth from "./useAuth";
-import useInput from "./useInput";
 
+import config from "../configs/config";
 
-const REFRESH_URL = "/api/auth/token/refresh/"
 const useRefreshToken = () => {
+    const navigate = useNavigate();
     const { setAuth } = useAuth()
-    const [user, resetUser, userAttrs] = useInput("username", "")
 
     const refresh = async () => {
-        const response = await axios.post(REFRESH_URL, {},
-            {
-                withCredentials: true
-            }
-        );
+        console.log("request refresh token");
+        try {
+            await axios.post(config.api.refresh_token, {},
+                {
+                    withCredentials: true
+                }
+            );
 
-        setAuth(prev => {
-            // console.log(JSON.stringify(prev));
-            // console.log(response.data);
-            return { ...prev, accessToken: response.data.access, user: user };
-        })
-        return response.data.access;
+            const response = await axios.get(config.api.user, {
+                withCredentials: true
+            });
+
+            (response.status % 200 === 0) &&
+                setAuth({ user: response.data.username, email: response.data.email })
+
+        } catch (error) {
+            console.log("refresh token error:");
+            console.log(error);
+
+            navigate(config.links.sign_in, { replace: true });
+        }
+
     }
 
     return refresh;

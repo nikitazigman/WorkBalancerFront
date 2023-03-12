@@ -1,6 +1,32 @@
-# ToDo: 
-auth parts: store the refresh token to the cache or somewhere
-header: add logout 
+# WorkBalancer Front:
+
+## About the project:
+
+The Work Balancer Front is a front-end part of the [WorkBalancer](https://github.com/nikitazigman/Work Balancer) WEB application.
+
+The project was written on (React)[https://reactos.org/] using the following technologies:
+
+- [axios](https://www.npmjs.com/package/axios)
+- [validators](https://www.npmjs.com/package/validator)
+
+Here is a link to the design : [figma project](https://www.figma.com/file/TO9UUFGr9VGc1C7uHi4nl8/Work Balancer?node-id=603%3A1030&t=MhDHrQfgNAVnc4RZ-0)
+
+## Backlog:
+
+- The app asks a user permission to use Cookies
+- User can get information about his progress and history. (history page)
+- Users can get metrics about their workload (Account page, dashboard)
+- Users can change login and passwords
+- Users get notifications and suggestions if they are out of average daily complexity.
+- User can see their level (metric of sum complexity per day) in the header
+- Users can add additional comments or descriptions to the task or day (Currently the idea is to use stickers like in Miro or Figma)
+
+## ToDo:
+
+- Define proper architecture and stack of technologies
+- Rewrite using TypeScript
+- Refactoring
+- Allocate time and finnaly learn React or find someone already good at it :smiley:
 
 # Getting Started with Create React App
 

@@ -2,14 +2,14 @@
 
 ## About the project:
 
-The Work Balancer Front is a front-end part of the [WorkBalancer](https://github.com/nikitazigman/Work Balancer) WEB application.
+The Work Balancer Front is a front-end part of the [WorkBalancer](https://github.com/nikitazigman/WorkBalancer) WEB application.
 
 The project was written on (React)[https://reactos.org/] using the following technologies:
 
 - [axios](https://www.npmjs.com/package/axios)
 - [validators](https://www.npmjs.com/package/validator)
 
-Here is a link to the design : [figma project](https://www.figma.com/file/TO9UUFGr9VGc1C7uHi4nl8/Work Balancer?node-id=603%3A1030&t=MhDHrQfgNAVnc4RZ-0)
+Here is a link to the design : [figma project](https://www.figma.com/file/TO9UUFGr9VGc1C7uHi4nl8/WorkBalancer?node-id=603%3A1030&t=MhDHrQfgNAVnc4RZ-0)
 
 ## Backlog:
 
